@@ -1,0 +1,11 @@
+{
+  "applications": {
+    "USC Triathlon": {
+      "parseAppId": "sm2VYyUUdC0nlizJJeupPHFbHQaKJvjFG1fG0PzF",
+      "herokuAppId": "630eab99-2de6-4c5b-b0e9-9e282f3f8ffc"
+    },
+    "_default": {
+      "link": "USC Triathlon"
+    }
+  }
+}
