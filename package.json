@@ -1,22 +1,24 @@
 {
-  "name": "Parse-Cloud-Code-Heroku",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Migrating Cloud Code to Heroku with Express",
-  "main": "server",
+  "description": "server code for the usc triathlon app",
+  "main": "main.js",
   "scripts": {
-    "start": "NODE_PATH=$NODE_PATH:./lib node server.js",
-    "postinstall": "NODE_PATH=$NODE_PATH:./lib node scripts/register-webhooks.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielCantwell/USC-Triathlon.git"
+  },
+  "author": "Daniel Cantwell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielCantwell/USC-Triathlon/issues"
+  },
+  "homepage": "https://github.com/danielCantwell/USC-Triathlon#readme",
   "dependencies": {
-    "express": "~4.9.x",
-    "body-parser": "~1.12.4",
-    "mongodb": "~2.0.33",
-    "parse": "~1.6",
-    "parse-cloud-express": "~1.0",
-    "multer": "~0.1.8",
-    "jsonfile": "~2.2.3"
-  },
-  "engines": {
-    "node": "0.12.2"
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "firebase": "^2.4.0"
   }
 }
