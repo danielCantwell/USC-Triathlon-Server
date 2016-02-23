@@ -4,7 +4,7 @@
   "description": "server code for the usc triathlon app",
   "main": "main.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
