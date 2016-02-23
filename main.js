@@ -14,16 +14,24 @@ app.get('/', function(req, res) {
 var errorStatus = 'error';
 var successStatus = 'success';
 
+// TODO for everything, even "complete" functions - in addition to paremeter checking, to type checking on paremeters
+
 /*
 	Events
 */
 
 
-// TODO
-app.get('/api/loadEvents', function(req, res) {
+// COMPLETE
+app.get('/api/loadEvents/:etype', function(req, res) {
 	console.log("Events / Load Events");
-	res.type('text/plain');
-	res.send('events / load events');
+	console.log(req.params.etype);
+	if (req.params.etype != 'all' && req.params.etype != 'practice'
+		&& req.params.etype != 'race' && req.params.etype != 'event') {
+		var response = { status: errorStatus, error: 'type must be all, practice, race, or event' };
+		res.json(response);
+	} else {
+		api.loadEvents(req, res);
+	}
 });
 
 // COMPLETE
@@ -43,7 +51,7 @@ app.post('/api/createEvent', function(req, res) {
 app.post('/api/rsvp', function(req, res) {
 	console.log("Events / RSVP");
 	if (req.body.eventId == null || req.body.memberId == null || req.body.going == null
-		|| req.body.drivingSelf == null || req.body.hasCar == null || req.body.passengerCapacity == null
+		|| req.body.drivingSelf == null || req.body.hasCar == null || req.body.hasBike == null || req.body.passengerCapacity == null
 		|| req.body.bikeCapacity == null || req.body.needsRack == null || req.body.needsBike == null || req.body.comment == null) {
 		var response = { status: errorStatus, error: 'parameters missing' };
 		res.json(response);
@@ -53,15 +61,22 @@ app.post('/api/rsvp', function(req, res) {
 });
 
 // COMPLETE
-app.get('/api/createCarpools', function(req, res) {
-	console.log("Events / Create Carpools")
-	var carpools = api.createCarpools();
-	res.json(carpools);
-	// if (carpools != null) {
-	// 	res.json('status: success');
-	// } else {
-	// 	res.json('status: failure')
-	// }
+app.post('/api/createCarpools/:type', function(req, res) {
+	console.log("Events / Create Carpools");
+	var type = req.params.type;
+	if (req.body.eventId == null) {
+		var response = { status: errorStatus, error: 'eventId required' };
+		res.json(response);
+	} else if (type == 'person') {
+		console.log("Events / Create Person Carpools");
+		api.createPersonCarpools(req, res);
+	} else if (type == 'bike') {
+		console.log("Events / Create Bike Carpools")
+		api.createBikeCarpools(req, res);
+	} else {
+		var response = { status: errorStatus, error: 'carpool type must be either person or bike' };
+		res.json(response);
+	}
 });
 
 /*
@@ -90,18 +105,16 @@ app.post('/api/addChat', function(req, res) {
 	}
 });
 
-// TODO
+// COMPLETE
 app.get('/api/loadNews', function(req, res) {
 	console.log("Chat / Load News");
-	res.type('text/plain');
-	res.send('chat / load news');
+	api.loadNews(req, res);
 });
 
-// TODO
+// COMPLETE
 app.get('/api/loadChat', function(req, res) {
 	console.log("Chat / Load Chat");
-	res.type('text/plain');
-	res.send('chat / load chat');
+	api.loadChat(req, res);
 });
 
 
@@ -116,26 +129,35 @@ app.post('/api/createUser', function(req, res) {
 	if (req.body.email == null || req.body.password == null || req.body.firstName == null || req.body.lastName == null) {
 		var response = { status: errorStatus, error: 'parameters must contain email and password, firstName and lastName' };
 		res.json(response);
+	} else {
+		api.createUser(req, res);
 	}
-	api.createUser(req, res);
 });
 
-// TODO
-app.post('/api/promoteUserToOfficer', function(req, res) {
+// COMPLETE
+app.post('/api/login', function(req, res) {
+	console.log("Login")
+	if (req.body.email == null || req.body.password == null) {
+		var response = { status: errorStatus, error: 'parameters must contain email and password' };
+		res.json(response);
+	} else {
+		api.loginUser(req, res);
+	}
+});
+
+// COMPLETE
+app.post('/api/promoteToOfficer', function(req, res) {
 	console.log("Promote User to Officer")
 	if (req.body.uid == null || req.body.ocode == null) {
 		var response = { status: errorStatus, error: 'parameters must contain user id and officer code' };
 		res.json(response);
 	} else {
-		api.promoteUserToOfficer(req, res);
+		api.promoteToOfficer(req, res);
 	}
 });
 
-// COMPLETE
-app.get('/api/login/:email/:password', function(req, res) {
-	console.log("Login")
-	api.loginUser(req, res);
-});
+
+/* Start Server */
 
 app.listen(process.env.PORT || 5000);
 console.log("app running on port 5000");
