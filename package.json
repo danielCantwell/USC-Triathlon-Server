@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danielCantwell/USC-Triathlon.git"
+    "url": "git+https://github.com/danielCantwell/USC-Triathlon-Server.git"
   },
   "author": "Daniel Cantwell",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/danielCantwell/USC-Triathlon/issues"
+    "url": "https://github.com/danielCantwell/USC-Triathlon-Server/issues"
   },
-  "homepage": "https://github.com/danielCantwell/USC-Triathlon#readme",
+  "homepage": "https://github.com/danielCantwell/USC-Triathlon-Server#readme",
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.4",
