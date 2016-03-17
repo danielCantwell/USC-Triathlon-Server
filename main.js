@@ -139,7 +139,7 @@ app.post('/api/login', function(req, res) {
 	console.log("Login");
 	if (req.body.email == null || req.body.password == null) {
 		var response = { status: errorStatus, error: 'parameters must contain email and password' };
-		console.log(req.body);
+		console.log("request body: \n" + req.body);
 		res.json(response);
 	} else {
 		api.loginUser(req, res);
