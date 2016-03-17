@@ -5,7 +5,8 @@ var rootRef		= new Firebase("https://usctriathlon.firebaseio.com/"),
 	rsvpRef		= rootRef.child('rsvp'),
 	carpoolRef	= rootRef.child('carpool'),
 	chatRef		= rootRef.child('chat'),
-	newsRef		= rootRef.child('news');
+	newsRef		= rootRef.child('news'),
+	profileRef	= rootRef.chihld('profile');
 
 var errorStatus = 'error';
 var successStatus = 'success';
@@ -259,6 +260,26 @@ exports.loginUser = function(req, res) {
 	});
 }
 
+/* User Profile */
+
+exports.updateCarProfile = function(req, res) {
+	var uid = req.body.uid;
+	var carProfile = req.body.carProfile;
+
+	profileRef.child(uid + '/car').set(carProfile, function(error) {
+		if (error) {
+			var response = { status: errorStatus, error: 'unable to update car profile' };
+			res.json(response);
+		} else {
+			res.json( {status: successStatus} );
+		}
+	});
+}
+
+exports.updateBikeProfile = function(req, res) {
+
+}
+
 exports.promoteToOfficer = function(req, res) {
 	var id = req.body.uid;
 	var code = req.body.ocode;
@@ -284,6 +305,8 @@ exports.promoteToOfficer = function(req, res) {
 		}
 	});
 }
+
+/* FUNCTION */
 
 exports.createPersonCarpools = function(req, res) {
 	var eventId = req.body.eventId;
@@ -423,36 +446,6 @@ exports.createBikeCarpools = function(req, res) {
 		availableCars.sort(function(a, b) {
 			return parseFloat(b.carpoolValue - a.carpoolValue);
 		});
-
-		// with no carpool value - this is no longer necessary
-		// among availableCars with equal bike capacity, sort in by passenger capacity in descending order
-
-		// var sortedAvailableCars = [];
-		// var tempCars = [];
-		// var prevBikeCapacity = availableCars[0].bikeCapacity;
-		// var currentBikeCapacity = availableCars[0].bikeCapacity;
-		// tempCars.push(availableCars[0]);
-
-		// for (var i = 1; i < availableCars.length; i++) {
-		// 	currentBikeCapacity = availableCars[i].bikeCapacity;
-		// 	// if the current car has the same capacity as the previous car, group it
-		// 	if (currentBikeCapacity == prevBikeCapacity) {
-		// 		tempCars.push(availableCars[i]);
-		// 	} else {
-		// 		// if the current car has a different capacity, sort the previous cars
-		// 		prevBikeCapacity = currentBikeCapacity;
-		// 		tempCars.sort(function(a, b) {
-		// 			return parseFloat(b.passengerCapacity - a.passengerCapacity);
-		// 		});
-		// 		// and push the previous grouping to the list
-		// 		for (var j = 0; j < tempCars.length; j++) {
-		// 			sortedAvailableCars.push(tempCars[j]);
-		// 		}
-		// 		// start a new grouping
-		// 		tempCars = [];
-		// 		tempCars.push(availableCars[i]);
-		// 	}
-		// };
 
 		// now the cars are sorted correctly, we must select which cars will be used
 		var vehicles = [];

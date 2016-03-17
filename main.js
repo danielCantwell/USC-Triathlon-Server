@@ -136,18 +136,20 @@ app.post('/api/createUser', function(req, res) {
 
 // COMPLETE
 app.post('/api/login', function(req, res) {
-	console.log("Login")
+	console.log("Login");
 	if (req.body.email == null || req.body.password == null) {
-		var response = { status: errorStatus, error: 'parameters must contain email and password' };
+		var response = { status: errorStatus, error: 'parameters must contain email and password\n' + req.body };
 		res.json(response);
 	} else {
 		api.loginUser(req, res);
 	}
 });
 
+/* USER PROFILE */
+
 // COMPLETE
 app.post('/api/promoteToOfficer', function(req, res) {
-	console.log("Promote User to Officer")
+	console.log("Promote User to Officer");
 	if (req.body.uid == null || req.body.ocode == null) {
 		var response = { status: errorStatus, error: 'parameters must contain user id and officer code' };
 		res.json(response);
@@ -156,6 +158,28 @@ app.post('/api/promoteToOfficer', function(req, res) {
 	}
 });
 
+// TODO
+app.post('/api/updateCarProfile', function(req, res) {
+	console.log("Update Car Profile");
+	if (req.body.uid == null || req.body.profile == null ||
+		req.body.profile.hasCar == null || req.body.profile.pCap == null || req.body.profile.bCap == null) {
+		var response = { status: errorStatus, error: 'profile json object must contain hasCar, pCap, bCap' };
+		res.json(response);
+	} else {
+		api.updateCar(req, res);
+	}
+});
+
+// TODO
+app.post('/api/updateBikeProfile', function(req, res) {
+	console.log("Update Bike Profile");
+	if (req.body.uid == null || req.body.profile == null) {
+		var response = { status: errorStatus, error: 'profile json object missing' };
+		res.json(response);
+	} else {
+		api.updateCar(req, res);
+	}
+});
 
 /* Start Server */
 
