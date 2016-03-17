@@ -137,7 +137,6 @@ app.post('/api/createUser', function(req, res) {
 // COMPLETE
 app.post('/api/login', function(req, res) {
 	console.log("Login");
-	console.log(JSON.stringify(req.body, null, 4));
 	if (req.body.email == null || req.body.password == null) {
 		var response = { status: errorStatus, error: 'parameters must contain email and password' };
 		res.json(response);
