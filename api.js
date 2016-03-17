@@ -248,12 +248,12 @@ exports.loginUser = function(req, res) {
 		var result = {};
 		if (error) {
 			console.log("error");
-			result.status =  'failure';
+			result.status =  errorStatus;
 			result.error =  error;
 			res.json(result);
 		} else {
 			console.log("success");
-			result.status =  'success';
+			result.status =  successStatus;
 			result.authData = authData;
 			res.json(result);
 		}
