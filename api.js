@@ -6,7 +6,7 @@ var rootRef		= new Firebase("https://usctriathlon.firebaseio.com/"),
 	carpoolRef	= rootRef.child('carpool'),
 	chatRef		= rootRef.child('chat'),
 	newsRef		= rootRef.child('news'),
-	profileRef	= rootRef.chihld('profile');
+	profileRef	= rootRef.child('profile');
 
 var errorStatus = 'error';
 var successStatus = 'success';
