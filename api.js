@@ -203,7 +203,7 @@ exports.createUser = function(req, res) {
 	var userPassword = req.body.password;
 	var firstName = req.body.firstName;
 	var lastName = req.body.lastName;
-	var officer = req.body.officer;
+	var isOfficer = (req.body.officer === '1');
 
 	rootRef.createUser({
 		email: userEmail,
@@ -220,7 +220,7 @@ exports.createUser = function(req, res) {
 	            createdAt : Firebase.ServerValue.TIMESTAMP,
 	            firstName: firstName,
 	            lastName : lastName,
-	            officer : officer
+	            officer : isOfficer
 	        }, function(error) {
 	        	if (error) {
 	        		res.json({
