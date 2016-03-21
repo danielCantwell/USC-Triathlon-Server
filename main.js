@@ -126,8 +126,8 @@ app.get('/api/loadChat', function(req, res) {
 // COMPLETE
 app.post('/api/signup', function(req, res) {
 	console.log("Sign Up");
-	if (req.body.email == null || req.body.password == null || req.body.firstName == null || req.body.lastName == null) {
-		var response = { status: errorStatus, error: 'parameters must contain email and password, firstName and lastName' };
+	if (req.body.email == null || req.body.password == null || req.body.firstName == null || req.body.lastName == null || req.body.officer == null) {
+		var response = { status: errorStatus, error: 'parameters must contain email and password, firstName, lastName and officer status' };
 		res.json(response);
 	} else {
 		api.createUser(req, res);
