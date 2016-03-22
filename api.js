@@ -86,13 +86,13 @@ exports.loadNews = function(req, res) {
 	newsRef.on('value', function(snapshot) {
 		if (snapshot.val() != null) {
 			res.json({
-				status: errorStatus,
-				error: "No news was loaded"
+				status: successStatus,
+				news: snapshot.val()
 			});
 		} else {
 			res.json({
-				status: successStatus,
-				news: snapshot.val()
+				status: errorStatus,
+				error: "No news was loaded"
 			});
 		}
 	});
