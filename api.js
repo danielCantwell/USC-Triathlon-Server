@@ -84,7 +84,17 @@ exports.addChat = function(req, res) {
 
 exports.loadNews = function(req, res) {
 	newsRef.on('value', function(snapshot) {
-		res.json(snapshot.val());
+		if (snapshot.val() != null) {
+			res.json({
+				status: errorStatus,
+				error: "No news was loaded"
+			});
+		} else {
+			res.json({
+				status: successStatus,
+				news: snapshot.val()
+			});
+		}
 	});
 }
 
@@ -295,7 +305,7 @@ exports.promoteToOfficer = function(req, res) {
 					var response = { status: errorStatus, error: 'unable to promote to officer at this time' };
 					res.json(response);
 				} else {
-					res.json({status: successStatus});
+					res.json({ status: successStatus });
 				}
 			});
 
