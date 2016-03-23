@@ -85,18 +85,20 @@ app.post('/api/createCarpools/:type', function(req, res) {
 
 // COMPLETE
 app.post('/api/addNews', function(req, res) {
-	console.log("Chat / Add News");
+	console.log("Add News");
 	if (req.body.author == null || req.body.subject == null || req.body.message == null) {
 		var response = { status: errorStatus, error: 'parameters missing' };
+		console.log("Invalid parameters");
 		res.json(response);
 	} else {
+		console.log("Valid parameters");
 		api.addNews(req, res);
 	}
 });
 
 // COMPLETE
 app.post('/api/addChat', function(req, res) {
-	console.log("Chat / Add News");
+	console.log("Add Chat");
 	if (req.body.author == null || req.body.message == null) {
 		var response = { status: errorStatus, error: 'parameters missing' };
 		res.json(response);
@@ -107,13 +109,13 @@ app.post('/api/addChat', function(req, res) {
 
 // COMPLETE
 app.get('/api/loadNews', function(req, res) {
-	console.log("Chat / Load News");
+	console.log("Load News");
 	api.loadNews(req, res);
 });
 
 // COMPLETE
 app.get('/api/loadChat', function(req, res) {
-	console.log("Chat / Load Chat");
+	console.log("Load Chat");
 	api.loadChat(req, res);
 });
 

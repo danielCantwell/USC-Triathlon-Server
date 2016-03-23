@@ -44,6 +44,7 @@ exports.addNews = function(req, res) {
 	};
 
 	var newDataRef = newsRef.push();
+	console.log("Pushing data to " + newDataRef);
 	newDataRef.set(newsItem, function(error) {
 		if (error) {
 			console.log("Add News : Error");
@@ -88,11 +89,13 @@ exports.addChat = function(req, res) {
 exports.loadNews = function(req, res) {
 	newsRef.on('value', function(snapshot) {
 		if (snapshot.val() != null) {
+			console.log("Successfully loaded news");
 			res.json({
 				status: successStatus,
 				news: snapshot.val()
 			});
 		} else {
+			console.log("Error loading news");
 			res.json({
 				status: errorStatus,
 				error: "No news was loaded"
