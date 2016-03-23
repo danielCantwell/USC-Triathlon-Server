@@ -46,11 +46,13 @@ exports.addNews = function(req, res) {
 	var newDataRef = newsRef.push();
 	newDataRef.set(newsItem, function(error) {
 		if (error) {
+			console.log("Add News : Error");
 			res.json({
 				status: errorStatus,
 				error: error
 			});
 		} else {
+			console.log("Add News : Success");
 			res.json({
 				status: successStatus
 			});
