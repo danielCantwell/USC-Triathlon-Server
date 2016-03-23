@@ -87,7 +87,7 @@ exports.addChat = function(req, res) {
 }
 
 exports.loadNews = function(req, res) {
-	newsRef.on('value', function(snapshot) {
+	newsRef.once('value', function(snapshot) {
 		if (snapshot.val() != null) {
 			console.log("Successfully loaded news");
 			res.json({
@@ -105,7 +105,7 @@ exports.loadNews = function(req, res) {
 }
 
 exports.loadChat = function(req, res) {
-	chatRef.on('value', function(snapshot) {
+	chatRef.once('value', function(snapshot) {
 		res.json(snapshot.val());
 	});
 }
@@ -150,7 +150,7 @@ exports.createEvent = function(req, res) {
 exports.loadEvents = function(req, res) {
 	var type = req.params.etype;
 	if (type == 'all') {
-		eventRef.on('value', function(snapshot) {
+		eventRef.once('value', function(snapshot) {
 			if (snapshot.val() != null) {
 				res.json(snapshot.val());
 			} else {
@@ -159,7 +159,7 @@ exports.loadEvents = function(req, res) {
 			}
 		});
 	} else {
-		eventRef.orderByChild('type').equalTo(type).on('value', function(snapshot) {
+		eventRef.orderByChild('type').equalTo(type).once('value', function(snapshot) {
 			if (snapshot.val() != null) {
 				res.json(snapshot.val());
 			} else {
@@ -301,7 +301,7 @@ exports.promoteToOfficer = function(req, res) {
 	var id = req.body.uid;
 	var code = req.body.ocode;
 
-	rootRef.child('officerCode').on('value', function(snapshot) {
+	rootRef.child('officerCode').once('value', function(snapshot) {
 		var actualCode = snapshot.val();
 
 		if (code == actualCode) {
@@ -327,7 +327,7 @@ exports.promoteToOfficer = function(req, res) {
 
 exports.createPersonCarpools = function(req, res) {
 	var eventId = req.body.eventId;
-	rsvpRef.child(eventId).on('value', function(snapshot) {
+	rsvpRef.child(eventId).once('value', function(snapshot) {
 		var rsvps = snapshot.val();
 		var availableCars = [];
 		var people = [];
@@ -404,7 +404,7 @@ exports.createPersonCarpools = function(req, res) {
 exports.createBikeCarpools = function(req, res) {
 
 	var eventId = req.body.eventId;
-	rsvpRef.child(eventId).on('value', function(snapshot) {
+	rsvpRef.child(eventId).once('value', function(snapshot) {
 		var rsvps = snapshot.val();
 		var availableCars = [];
 		var people = [];
