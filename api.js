@@ -133,6 +133,7 @@ exports.createEvent = function(req, res) {
 	};
 
 	var eventDataRef = eventRef.child(type).push();
+	console.log("Pushing data to " + eventDataRef;
 	eventDataRef.set(e, function(error) {
 		var response = {};
 		if (error) {
@@ -148,7 +149,7 @@ exports.createEvent = function(req, res) {
 exports.loadEvents = function(req, res) {
 	var type = req.params.etype;
 	
-	eventRef.orderByChild('type').equalTo(type).once('value', function(snapshot) {
+	eventRef.child(type).once('value', function(snapshot) {
 		if (snapshot.val() != null) {
 			res.json(snapshot.val());
 		} else {
