@@ -132,7 +132,8 @@ exports.createEvent = function(req, res) {
 		reqRsvp: reqRsvp
 	};
 
-	var eventId = eventRef.child(type).push(e, function(error) {
+	var eventDataRef = eventRef.child(type).push();
+	eventDataRef.set(e, function(error) {
 		var response = {};
 		if (error) {
 			response.status = errorStatus;
