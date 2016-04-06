@@ -115,27 +115,24 @@ exports.loadChat = function(req, res) {
 */
 
 exports.createEvent = function(req, res) {
-	var name 			= req.body.name,
-		date 			= req.body.date,
+	var date 			= req.body.date,
 		details			= req.body.details,
 		type 			= req.body.type,
 		carpooling		= req.body.carpooling,
 		cycling			= req.body.cycling,
 		meetingLocation	= req.body.meetingLocation,
-		eventLocation	= req.body.eventLocation;
+		reqRsvp			= req.body.reqRsvp;
 
 	var e = {
-		name: name,
 		date: date,
 		details: details,
-		type: type,
 		carpooling: carpooling,
 		cycling: cycling,
 		meetingLocation: meetingLocation,
-		eventLocation: eventLocation
+		reqRsvp: reqRsvp
 	};
 
-	var eventId = eventRef.push(e, function(error) {
+	var eventId = eventRef.child(type).push(e, function(error) {
 		var response = {};
 		if (error) {
 			response.status = errorStatus;
@@ -149,26 +146,15 @@ exports.createEvent = function(req, res) {
 
 exports.loadEvents = function(req, res) {
 	var type = req.params.etype;
-	if (type == 'all') {
-		eventRef.once('value', function(snapshot) {
-			if (snapshot.val() != null) {
-				res.json(snapshot.val());
-			} else {
-				var response = { status: errorStatus, error: 'no results' };
-				res.json(response);
-			}
-		});
-	} else {
-		eventRef.orderByChild('type').equalTo(type).once('value', function(snapshot) {
-			if (snapshot.val() != null) {
-				res.json(snapshot.val());
-			} else {
-				var response = { status: errorStatus, error: 'no results' };
-				res.json(response);
-			}
-			
-		});
-	}
+	
+	eventRef.orderByChild('type').equalTo(type).once('value', function(snapshot) {
+		if (snapshot.val() != null) {
+			res.json(snapshot.val());
+		} else {
+			var response = { status: errorStatus, error: 'no results' };
+			res.json(response);
+		}
+	});
 }
 
 exports.rsvp = function(req, res) {

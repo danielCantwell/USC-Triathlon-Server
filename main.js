@@ -25,9 +25,9 @@ var successStatus = 'success';
 app.get('/api/loadEvents/:etype', function(req, res) {
 	console.log("Events / Load Events");
 	console.log(req.params.etype);
-	if (req.params.etype != 'all' && req.params.etype != 'practice'
-		&& req.params.etype != 'race' && req.params.etype != 'event') {
-		var response = { status: errorStatus, error: 'type must be all, practice, race, or event' };
+	if (!(req.params.etype == 'practice' || req.params.etype == 'race' || req.params.etype == 'other')) {
+		console.log("Load Events : Invalid Parameters")
+		var response = { status: errorStatus, error: 'type must be practice, race, or other' };
 		res.json(response);
 	} else {
 		api.loadEvents(req, res);
@@ -37,9 +37,8 @@ app.get('/api/loadEvents/:etype', function(req, res) {
 // COMPLETE
 app.post('/api/createEvent', function(req, res) {
 	console.log("Events / Create Event")
-	if (req.body.name == null || req.body.date == null || req.body.details == null
-		|| req.body.type == null || req.body.carpooling == null || req.body.cycling == null
-		|| req.body.meetingLocation == null || req.body.eventLocation == null) {
+	if (req.body.date == null || req.body.details == null || req.body.type == null || req.body.reqRsvp == null
+		|| req.body.carpooling == null || req.body.cycling == null || req.body.meetingLocation == null) {
 		var response = { status: errorStatus, error: 'parameters missing' };
 		res.json(response);
 	} else {
