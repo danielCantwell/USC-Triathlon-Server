@@ -151,10 +151,17 @@ exports.loadEvents = function(req, res) {
 	
 	eventRef.child(type).once('value', function(snapshot) {
 		if (snapshot.val() != null) {
-			res.json(snapshot.val());
+			console.log("Successfully loaded events");
+			res.json({
+				status: successStatus,
+				events: snapshot.val()
+			});
 		} else {
-			var response = { status: errorStatus, error: 'no results' };
-			res.json(response);
+			console.log("Failed loading events");
+			res.json({
+				status: errorStatus,
+				error: "No events were loaded"
+			});
 		}
 	});
 }
