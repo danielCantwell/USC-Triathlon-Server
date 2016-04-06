@@ -133,7 +133,7 @@ exports.createEvent = function(req, res) {
 	};
 
 	var eventDataRef = eventRef.child(type).push();
-	console.log("Pushing data to " + eventDataRef;
+	console.log("Pushing data to " + eventDataRef);
 	eventDataRef.set(e, function(error) {
 		var response = {};
 		if (error) {
