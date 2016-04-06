@@ -118,10 +118,10 @@ exports.createEvent = function(req, res) {
 	var date 			= req.body.date,
 		details			= req.body.details,
 		type 			= req.body.type,
-		carpooling		= req.body.carpooling,
-		cycling			= req.body.cycling,
+		carpooling		= req.body.carpooling == '1',
+		cycling			= req.body.cycling == '1',
 		meetingLocation	= req.body.meetingLocation,
-		reqRsvp			= req.body.reqRsvp;
+		reqRsvp			= req.body.reqRsvp == '1';
 
 	var e = {
 		date: date,
