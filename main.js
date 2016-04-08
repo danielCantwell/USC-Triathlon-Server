@@ -36,13 +36,24 @@ app.get('/api/loadEvents/:etype', function(req, res) {
 
 // COMPLETE
 app.post('/api/createEvent', function(req, res) {
-	console.log("Events / Create Event")
+	console.log("Events / Create Event");
 	if (req.body.date == null || req.body.details == null || req.body.type == null || req.body.reqRsvp == null
 		|| req.body.carpooling == null || req.body.cycling == null || req.body.meetingLocation == null) {
 		var response = { status: errorStatus, error: 'parameters missing' };
 		res.json(response);
 	} else {
 		api.createEvent(req, res);
+	}
+});
+
+// COMPLETE
+app.post('/api/removeEvent', function(req, res) {
+	console.log("Events / Remove Event");
+	if (req.body.id == null) {
+		var response = { status: errorStatus, error: 'event id missing' };
+		res.json(response);
+	} else {
+		api.removeEvent(req, res);
 	}
 });
 

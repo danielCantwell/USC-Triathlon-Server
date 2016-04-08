@@ -146,6 +146,21 @@ exports.createEvent = function(req, res) {
 	});
 }
 
+exports.removeEvent = function(req, res) {
+	var id = req.body.id;
+
+	eventRef.child(id).remove(function(error) {
+		var response = {};
+		if (error) {
+			response.status = errorStatus;
+			response.error = error;
+		} else {
+			response.status = successStatus;
+		}
+		res.json(response);
+	});
+}
+
 exports.loadEvents = function(req, res) {
 	var type = req.params.etype;
 	
