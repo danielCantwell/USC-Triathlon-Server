@@ -49,8 +49,8 @@ app.post('/api/createEvent', function(req, res) {
 // COMPLETE
 app.post('/api/removeEvent', function(req, res) {
 	console.log("Events / Remove Event");
-	if (req.body.id == null) {
-		var response = { status: errorStatus, error: 'event id missing' };
+	if (req.body.type == null || req.body.id == null) {
+		var response = { status: errorStatus, error: 'event type or id parameters missing' };
 		res.json(response);
 	} else {
 		api.removeEvent(req, res);

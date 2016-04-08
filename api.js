@@ -147,9 +147,10 @@ exports.createEvent = function(req, res) {
 }
 
 exports.removeEvent = function(req, res) {
+	var type = req.body.type;
 	var id = req.body.id;
 
-	eventRef.child(id).remove(function(error) {
+	eventRef.child(type).child(id).remove(function(error) {
 		var response = {};
 		if (error) {
 			response.status = errorStatus;
