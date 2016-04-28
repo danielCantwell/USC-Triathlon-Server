@@ -72,7 +72,9 @@ exports.addChat = function(req, res) {
 		message: message
 	};
 
-	var messageId = chatRef.push(chatItem, function(error) {
+	var newDataRef = chatRef.push();
+	console.log("Pushing data to " + newDataRef);
+	newDataRef.set(chatItem, function(error) {
 		if (error) {
 			res.json({
 				status: errorStatus,
@@ -106,7 +108,19 @@ exports.loadNews = function(req, res) {
 
 exports.loadChat = function(req, res) {
 	chatRef.once('value', function(snapshot) {
-		res.json(snapshot.val());
+		if (snapshot.val() != null) {
+			console.log("Successfully loaded chat");
+			res.json({
+				status: successStatus,
+				chat: snapshot.val()
+			});
+		} else {
+			console.log("Error loading chat");
+			res.json({
+				status: errorStatus,
+				error: "No chat was loaded"
+			});
+		}
 	});
 }
 
@@ -150,6 +164,8 @@ exports.removeEvent = function(req, res) {
 	var type = req.body.type;
 	var id = req.body.id;
 
+	rsvpRef.child(id).remove();
+
 	eventRef.child(type).child(id).remove(function(error) {
 		var response = {};
 		if (error) {
@@ -184,39 +200,53 @@ exports.loadEvents = function(req, res) {
 
 exports.rsvp = function(req, res) {
 
-	var eventId 		= req.body.eventId,
-		memberId		= req.body.memberId,
-		going 			= req.body.going,
-		drivingSelf 	= req.body.drivingSelf,
-		hasCar			= req.body.hasCar,
-		hasBike			= req.body.hasBike,
-		passengerCapacity = req.body.passengerCapacity,
-		bikeCapacity 	= req.body.bikeCapacity,
-		needsRack 		= req.body.needsRack,
-		needsBike 		= req.body.needsBike,
-		comment 		= req.body.comment;
+	var eventId = req.body.eventId;
+	var uid = req.body.uid;
 
-	var rsvp = {
-		memberId: memberId,
-		going: going,
-		drivingSelf: drivingSelf,
-		hasCar: hasCar,
-		passengerCapacity: passengerCapacity,
-		bikeCapacity: bikeCapacity,
-		needsRack: needsRack,
-		needsBike: needsBike,
-		comment: comment
-	};
+	var rsvp = {};
+	if (req.body.comment != null) {
+		rsvp.comment = req.body.comment;
+	}
 
-	var rsvpId = rsvpRef.child(eventId).push(rsvp, function(error) {
-		var response = {};
-		if (error) {
-			response.status = errorStatus;
-			response.error = error;
+	memberRef.child(uid).once('value', function(snapshot) {
+		var name = snapshot.val().firstName + " " + snapshot.val().lastName;
+		rsvp.name = name;
+
+		rsvpRef.child(eventId).child(req.body.method).child(uid).set(rsvp, function(error) {
+			if (error) {
+				res.json({
+					status: errorStatus,
+					error: error
+				});
+			} else {
+				res.json({
+					status: successStatus
+				});
+			}
+		});
+	});
+
+	
+}
+
+exports.loadRSVPs = function(req, res) {
+
+	var id = req.body.eventId;
+
+	rsvpRef.child(id).once('value', function(snapshot) {
+		if (snapshot.val() != null) {
+			console.log("Successfully loaded rsvps");
+			res.json({
+				status: successStatus,
+				rsvps: snapshot.val()
+			});
 		} else {
-			response.status = successStatus;
+			console.log("Failed loading rsvps");
+			res.json({
+				status: errorStatus,
+				error: "No rsvps were loaded"
+			});
 		}
-		res.json(response);
 	});
 }
 
@@ -292,11 +322,21 @@ exports.loginUser = function(req, res) {
 
 exports.updateCarProfile = function(req, res) {
 	var uid = req.body.uid;
-	var carProfile = req.body.carProfile;
+	var hasCar = (req.body.hasCar === '1');
+	var pCap = req.body.pCap;
+	var bCap = req.body.bCap;
+	var needRack = (req.body.needRack === '1');
 
-	profileRef.child(uid + '/car').set(carProfile, function(error) {
+	var carProfile = {
+		hasCar: hasCar,
+		passengerCapacity: pCap,
+		bikeCapacity: bCap,
+		needRack: needRack
+	};
+
+	profileRef.child(uid).child('car').set(carProfile, function(error) {
 		if (error) {
-			var response = { status: errorStatus, error: 'unable to update car profile' };
+			var response = { status: errorStatus, error: error };
 			res.json(response);
 		} else {
 			res.json( {status: successStatus} );
@@ -304,8 +344,51 @@ exports.updateCarProfile = function(req, res) {
 	});
 }
 
-exports.updateBikeProfile = function(req, res) {
+exports.updateMemberInfo = function(req, res) {
+	var uid = req.body.uid;
+	var email = req.body.email;
+	var firstName = req.body.firstName;
+	var lastName = req.body.lastName;
+	var year = req.body.year;
+	var hasBike = (req.body.hasBike === '1');
 
+	memberRef.child(uid).update({ firstName: firstName, lastName: lastName });
+
+	var info = {
+		email: email,
+		year: year,
+		hasBike: hasBike
+	};
+
+	profileRef.child(uid).child('info').set(info, function(error) {
+		if (error) {
+			var response = { status: errorStatus, error: error };
+			res.json(response);
+		} else {
+			res.json( { status: successStatus } );
+		}
+	});
+}
+
+
+exports.getCarProfile = function(req, res) {
+	var uid = req.body.uid;
+
+	profileRef.child(uid).child('car').once('value', function(snapshot) {
+		if (snapshot.val() != null) {
+			console.log("Successfully loaded car profile");
+			res.json({
+				status: successStatus,
+				carInfo: snapshot.val()
+			});
+		} else {
+			console.log("Failed loading car profile");
+			res.json({
+				status: errorStatus,
+				error: "Could not load car information"
+			});
+		}
+	});
 }
 
 exports.promoteToOfficer = function(req, res) {
@@ -338,6 +421,7 @@ exports.promoteToOfficer = function(req, res) {
 
 exports.createPersonCarpools = function(req, res) {
 	var eventId = req.body.eventId;
+
 	rsvpRef.child(eventId).once('value', function(snapshot) {
 		var rsvps = snapshot.val();
 		var availableCars = [];

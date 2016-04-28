@@ -60,13 +60,22 @@ app.post('/api/removeEvent', function(req, res) {
 // COMPLETE
 app.post('/api/rsvp', function(req, res) {
 	console.log("Events / RSVP");
-	if (req.body.eventId == null || req.body.memberId == null || req.body.going == null
-		|| req.body.drivingSelf == null || req.body.hasCar == null || req.body.hasBike == null || req.body.passengerCapacity == null
-		|| req.body.bikeCapacity == null || req.body.needsRack == null || req.body.needsBike == null || req.body.comment == null) {
+	if (req.body.eventId == null || req.body.uid == null || req.body.method == null) {
 		var response = { status: errorStatus, error: 'parameters missing' };
 		res.json(response);
 	} else {
 		api.rsvp(req, res);
+	}
+});
+
+// COMPLETE
+app.post('/api/loadRSVPs', function(req, res) {
+	console.log("Events / Load RSVPs");
+	if (req.body.eventId == null) {
+		var response = { status: errorStatus, error: 'eventId parameter missing' };
+		res.json(response);
+	} else {
+		api.loadRSVPs(req, res);
 	}
 });
 
@@ -111,6 +120,7 @@ app.post('/api/addChat', function(req, res) {
 	console.log("Add Chat");
 	if (req.body.author == null || req.body.message == null) {
 		var response = { status: errorStatus, error: 'parameters missing' };
+		console.log("Invalid parameters");
 		res.json(response);
 	} else {
 		api.addChat(req, res);
@@ -170,26 +180,38 @@ app.post('/api/promoteToOfficer', function(req, res) {
 	}
 });
 
-// TODO
+// COMPLETE
 app.post('/api/updateCarProfile', function(req, res) {
 	console.log("Update Car Profile");
-	if (req.body.uid == null || req.body.profile == null ||
-		req.body.profile.hasCar == null || req.body.profile.pCap == null || req.body.profile.bCap == null) {
-		var response = { status: errorStatus, error: 'profile json object must contain hasCar, pCap, bCap' };
+	if (req.body.uid == null || req.body.hasCar == null ||
+		req.body.pCap == null || req.body.bCap == null || req.body.needRack == null) {
+		var response = { status: errorStatus, error: 'parameters must contain uid, hasCar, pCap, bCap, and needRack' };
 		res.json(response);
 	} else {
-		api.updateCar(req, res);
+		api.updateCarProfile(req, res);
 	}
 });
 
-// TODO
-app.post('/api/updateBikeProfile', function(req, res) {
-	console.log("Update Bike Profile");
-	if (req.body.uid == null || req.body.profile == null) {
-		var response = { status: errorStatus, error: 'profile json object missing' };
+// COMPLETE
+app.post('/api/updateMemberInfo', function(req, res) {
+	console.log("Update Member Info");
+	if (req.body.uid == null || req.body.email == null || req.body.firstName == null || req.body.lastName == null ||
+		req.body.year == null || req.body.hasBike == null) {
+		var response = { status: errorStatus, error: 'parameters must contain email, firstName, lastName, year, and hasBike' };
 		res.json(response);
 	} else {
-		api.updateCar(req, res);
+		api.updateMemberInfo(req, res);
+	}
+});
+
+// COMPLETE
+app.post('/api/getCarProfile', function(req, res) {
+	console.log("Get Car Profile");
+	if (req.body.uid == null) {
+		var response = { status: errorStatus, error: 'uid parameter missing' };
+		res.json(response);
+	} else {
+		api.getCarProfile(req, res);
 	}
 });
 
