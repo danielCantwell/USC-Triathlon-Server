@@ -19,6 +19,7 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.4",
-    "firebase": "^2.4.0"
+    "firebase": "^2.4.0",
+    "ws": "0.4.x"
   }
 }
