@@ -1,0 +1,394 @@
+
+/*							*
+ *			Directives		*
+ *							*/
+
+h1
+{
+	position: relative;
+	top: 10px;
+	font-size: 100%;
+}
+
+header
+{
+	height: 50px;
+}
+
+header > #settings,
+header > #cancel
+{
+	display: none;
+	visibility: hidden;
+}
+
+header > #new,
+header > #save
+{
+	display: none;
+	visibility: hidden;
+}
+
+nav
+{
+	top: 50px;
+	left: 0px;
+	width: 250px;
+	height: 100%;
+
+	border: 1px solid #FFFFFF;
+	border-width: 0px 1px 0px 1px;
+}
+
+ul
+{
+	list-style: none;
+}
+
+nav > ul
+{
+	font-size: 0px;
+	height: 100%;
+}
+
+nav > ul > li
+{
+	top: 10px;
+	font-size: 30px;
+	display: block;
+	width: 100%;
+	height: 160px;
+	line-height: 160px;
+
+	border: 1px solid #FFFFFF;
+	border-width: 1px 0px 1px 0px;
+}
+
+nav > #nav-hint
+{
+	top: 15px;
+	font-size: 25px;
+}
+
+nav #nav-settings
+{
+	display: block;
+}
+
+/*							*
+ *			Classes			*
+ *							*/
+
+[ng-view]
+{
+	top: 50px;
+	left: 250px;
+	background-color: #2A2A2A;
+}
+
+
+/*							*
+ *			News			*
+ *							*/
+
+#news-list
+{
+	width: 65%;
+}
+
+#news-list li,
+#schedule-list li
+{
+	height: 100px;
+	width: 95%;
+
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+
+	margin-bottom: 10px;
+
+	border-radius: 2px;
+}
+
+#news-list li > .news-title,
+#schedule-list li > .event-details
+{
+	height: 80px;
+	font-size: 26px;
+	text-align: left;
+}
+
+#news-list li > p,
+#schedule-list li > p
+{
+	display: inline-block;
+	position: relative;
+	margin-top: 0px;
+	font-size: 18px;
+	color: #4A4A4A;
+}
+
+#news-list li > .news-date,
+#schedule-list li > .event-date
+{
+	float: left;
+}
+
+#news-list li > .news-author
+{
+	float: right;
+}
+
+
+/*							*
+ *			Add News		*
+ *							*/
+
+ #desktop-add-news
+ {
+ 	display: block;
+ 	position: fixed;
+ 	top: 50px;
+ 	right: 0px;
+ 	bottom: 0px;
+
+ 	background-color: #2A2A2A;
+ 	width: 27%;
+
+ 	border: 1px solid #FFFFFF;
+	border-width: 0px 1px 0px 1px;
+ }
+
+ #desktop-add-news h2
+ {
+ 	position: relative;
+ 	top: 20px;
+ 	left: 10px;
+
+ 	font-family: 'SourceSansPro-Regular';
+ 	color: #FFFFFF;
+ 	font-size: 20px;
+ }
+
+ #desktop-add-news input
+ {
+ 	border-radius: 2px;
+ 	margin-top: 30px;
+ }
+
+ #desktop-add-news textarea
+ {
+ 	height: 300px;
+ 	margin-top: 20px;
+ 	border-radius: 2px;
+ }
+
+ #desktop-add-news button
+ {
+ 	display: block;
+ 	margin: 0 auto;
+ 	text-align: center;
+
+ 	position: relative;
+ 	top: 30px;
+ 	width: 80%;
+ 	height: 30px;
+
+ 	font-size: 20px;
+ 	color: #AA0000;
+ }
+
+ #add-news-view h2 {
+ 	font-size: 35px;
+ }
+
+ #add-news-title
+ {
+ 	width: 90%;
+ 	font-size: 20px;
+ }
+
+ #add-news-details
+ {
+ 	height: 50%;
+ 	font-size: 20px;
+ 	margin-top: 10px;
+ }
+
+/*							*
+ *			Chat			*
+ *							*/
+
+
+
+#chat-list
+{
+	display: block;
+
+	top: 55px;
+	bottom: 50px;
+	left: 260px;
+	right: 10px;
+
+	border-radius: 2px;
+}
+
+#chat-list li
+{
+	min-height: 40px;
+}
+
+#chat-list li > .chat-initials
+{
+	width: 40px;
+	height: 40px;
+}
+
+#chat-list li > .chat-initials > p
+{
+	font-size: 20px;
+	top: 10px;
+}
+
+#chat-list li .chat-author
+{
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+#chat-list li .chat-message
+{
+	font-size: 18px;
+}
+
+#chat-controls
+{
+	bottom: 5px;
+	right: 10px;
+	left: 260px;
+	height: 40px;
+}
+
+#chat-controls > input
+{
+	font-size: 20px;
+}
+
+#chat-controls > input[type="text"]
+{
+	width: 70%;
+	height: 40px;
+	left: 260px;
+
+	bottom: 5px;
+	border-radius: 2px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+#chat-controls > input[type="button"]
+{
+	height: 40px;
+	bottom: 5px;
+	right: 10px;
+	border: 1px solid #AA0000;
+	border-radius: 2px;
+	color: #AA0000;
+	width: 80px;
+}
+
+/*							*
+ *			Schedule		*
+ *							*/
+
+#schedule-list
+{
+	position: fixed;
+	width: auto;
+	bottom: 0px;
+	top: 110px;
+	left: 250px;
+	right: 300px;
+	overflow-y: scroll;
+}
+
+
+#schedule-types
+{
+	top: 50px;
+	height: 50px;
+	left: 250px;
+	border-width: 0px 0px 1px 0px;
+}
+
+#schedule-types > input
+{
+	font-size: 24px;
+}
+
+
+#desktop-add-event
+{
+	display: block;
+	position: fixed;
+	top: 101px;
+	right: 0px;
+	width: 300px;
+	height: 100%;
+	border: 1px solid #FFFFFF;
+	border-width: 0 0 0 1px;
+	padding-top: 10px;
+}
+
+#desktop-add-event > ul li
+{
+	padding-left: 15px;
+	color: #FFFFFF;
+	font-size: 16px;
+	margin-top: 10px;
+}
+
+#desktop-add-event > ul li input[type="text"],
+#desktop-add-event > ul li input[type="datetime-local"],
+#desktop-add-event > ul li input[type="button"],
+#desktop-add-event > ul li textarea
+{
+	-webkit-appearance: none;
+	width: 260px;
+	border: 1px solid #FFFFFF;
+	border-radius: 2px;
+	font-size: 16px;
+
+	padding-left: 10px;
+}
+
+#desktop-add-event > ul li input[type="text"],
+#desktop-add-event > ul li input[type="datetime-local"],
+#desktop-add-event > ul li input[type="button"]
+{
+	height: 30px;
+}
+
+#desktop-add-event > ul li input[type="button"]
+{
+	background-color: white;
+	color: #AA0000;
+	border-color: #AA0000;
+}
+
+#desktop-add-event > ul li input[type="button"]:hover
+{
+	cursor: pointer;
+	color: #FF0000;
+	border-color: #FF0000;
+}
+
+#desktop-add-event > ul li textarea
+{
+	margin-top: 5px;
+	padding-left: 5px;
+	padding-top: 5px;
+	height: 250px;
+	resize: none;
+}

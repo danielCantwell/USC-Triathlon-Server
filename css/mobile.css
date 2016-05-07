@@ -1,0 +1,475 @@
+
+/*							*
+ *			Fonts			*
+ *							*/
+
+@font-face {
+    font-family: "SourceSansPro-Regular";
+    src: url("/assets/SourceSansPro-Regular.ttf");
+}
+
+@font-face {
+    font-family: "SourceSansPro-Semibold";
+    src: url("/assets/SourceSansPro-Semibold.ttf");
+}
+
+/*							*
+ *			Directives		*
+ *							*/
+
+html
+{
+	font-family: "SourceSansPro-Regular";
+	height: 100%;
+	min-height: 100%;
+	width: 100%;
+	min-width: 100%;
+}
+
+body
+{
+	font-size: 200%;
+	height: 100%;
+	min-height: 100%;
+	width: 100%;
+	min-width: 100%;
+}
+
+header
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 90px;
+	background-color: #AA0000;
+	/*padding-top: 20px;*/
+	font-family: "SourceSansPro-Semibold";
+	/*padding-bottom: 10px;*/
+}
+
+h1
+{
+	position: relative;
+	top: 10px;
+	font-size: 200%;
+	color: #FFFFFF;
+}
+
+header > #settings,
+header > #cancel
+{
+	position: fixed;
+	left: 15px;
+	top: 0px;
+	height: 90px;
+	width: 90px;
+	font-size: 20px;
+}
+
+header > #new,
+header > #save
+{
+	position: fixed;
+	right: 15px;
+	top: 5px;
+	height: 80px;
+	width: 80px;
+	font-size: 20px;
+}
+
+nav
+{
+	position: fixed;
+	top: 90px;
+	left: 0;
+	right: 0;
+	height: 90px;
+	background-color: #2A2A2A;
+	color: #C2C2C2;
+}
+
+ul
+{
+	list-style: none;
+}
+
+nav > ul
+{
+	font-size: 0px;
+}
+
+nav > ul > li
+{
+	position: relative;
+	top: 25px;
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	width: 33.33%;
+	font-size: 40px;
+}
+
+nav > ul > li > a
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+nav > #nav-hint
+{
+	text-align: center;
+	position: relative;
+	top: 30px;
+}
+
+nav #nav-settings
+{
+	display: none;
+}
+
+hr
+{
+	margin: 0;
+	color: #FFFFFF;
+	height: 2px;
+}
+
+/*							*
+ *			Classes			*
+ *							*/
+
+.center-horizontal
+{
+	display: block;
+
+	margin-left: auto;
+	margin-right: auto;
+
+	text-align: center;
+}
+
+.nav-active
+{
+	font-family: 'SourceSansPro-Semibold';
+	color: #FFFFFF;
+}
+
+[ng-view]
+{
+	position: fixed;
+	top: 177px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	overflow: scroll;
+	background-color: #DDDDDD;
+}
+
+/*[ng-view] > :first-child
+{
+	min-height: 100%;
+	position: relative;
+}*/
+
+
+/*							*
+ *			News			*
+ *							*/
+
+#news-view,
+#schedule-view
+{
+	padding: 20px;
+}
+
+#news-list li,
+#schedule-list li
+{
+	background-color: #FFFFFF;
+	height: 160px;
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 4px;
+}
+
+#news-list li > .news-title,
+#schedule-list li > .event-details
+{
+	height: 105px;
+	font-size: 160%;
+	overflow: hidden;
+}
+
+#news-list li > p,
+#schedule-list li > p
+{
+	display: inline-block;
+	position: absolute;
+	margin-top: 15px;
+}
+
+#news-list li > .news-date,
+#schedule-list li > .event-date
+{
+	left: 40px;
+}
+
+#news-list li > .news-author
+{
+	right: 40px;
+}
+
+
+/*							*
+ *			Add News		*
+ *							*/
+
+ #desktop-add-news
+ {
+ 	display: none;
+ }
+
+ #add-news-view
+ {
+ 	background-color: #FFFFFF;
+
+ 	height: 100%;
+ }
+
+ #add-news-view h2 {
+ 	font-size: 50px;
+ 	padding-top: 30px;
+ 	padding-left: 20px;
+ }
+
+ #add-news-title-section
+ {
+ 	width: 100%;
+ 	background-color: blue;
+ }
+
+ #add-news-title
+ {
+ 	display: block;
+ 	margin: 0 auto;
+ 	width: 90%;
+ 	font-size: 40px;
+ 	border: 1px solid #A2A2A2;
+ 	border-radius: 5px;
+ 	margin-top: 20px;
+ 	padding: 10px;
+ }
+
+ #add-news-details-section
+ {
+ 	background-color: green;
+ 	position: relative;
+ 	left: 0px;
+ 	right: 0px;
+ 	padding: 20px;
+ 	height: 76%;
+ }
+
+ #add-news-details
+ {
+ 	resize: none;
+
+ 	display: block;
+ 	margin: 0 auto;
+ 	width: 90%;
+
+	position: relative;
+	top: 10px;
+	height: 77%;
+
+ 	font-size: 30px;
+ 	border: 1px solid #A2A2A2;
+ 	border-radius: 5px;
+ 	margin-top: 20px;
+ 	padding: 10px;
+ }
+
+/*							*
+ *			Chat			*
+ *							*/
+
+#chat-view
+{
+	height: 100%;
+	padding: 20px;
+}
+
+#chat-list
+{
+	position: fixed;
+	top: 200px;
+	left: 20px;
+	right: 20px;
+	bottom: 80px;
+
+	overflow: scroll;
+
+	background-color: #FFFFFF;
+	border-radius: 4px;
+}
+
+#chat-list li
+{
+	min-height: 100px;
+	padding: 10px;
+}
+
+#chat-list li > .chat-initials
+{
+	position: relative;
+	top: 5px;
+	width: 70px;
+	height: 70px;
+	vertical-align: top;
+	background-color: #AA0000;
+	display: inline-block;
+	border-radius: 50%;
+}
+
+#chat-list li > .chat-initials > p
+{
+	position: relative;
+	color: #FFFFFF;
+	text-align: center;
+	top: 20px;
+}
+
+#chat-list li > article
+{
+	width: 90%;
+	display: inline-block;
+	padding-left: 10px;
+}
+
+#chat-list li .chat-author
+{
+	color: #A2A2A2;
+	font-size: 20px;
+}
+
+#chat-list li .chat-message
+{
+	color: #2A2A2A;
+	font-size: 40px;
+}
+
+#chat-controls
+{
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background-color: #2A2A2A;
+	height: 85px;
+}
+
+#chat-controls > input
+{
+	-webkit-appearance: none;
+	border: none;
+	position: fixed;
+
+	background-color: #FFFFFF;
+	border-radius: 5px;
+	font-size: 32px;
+}
+
+#chat-controls > input[type="text"]
+{
+	width: 75%;
+	height: 65px;
+	bottom: 10px;
+	left: 20px;
+
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#chat-controls > input[type="button"]
+{
+	width: 15%;
+	bottom: 10px;
+	right: 20px;
+	height: 67px;
+	background-color: white;
+	-webkit-transition: background-color 800ms linear;
+    -moz-transition: background-color 800ms linear;
+    -o-transition: background-color 800ms linear;
+    -ms-transition: background-color 800ms linear;
+    transition: background-color 800ms linear;
+}
+
+#chat-controls > input[type="button"]:hover
+{
+	cursor: pointer;
+}
+
+#chat-controls > input[type="button"]:active
+{
+	background-color: #AA0000;
+	-webkit-transition: background-color 100ms linear;
+    -moz-transition: background-color 100ms linear;
+    -o-transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    transition: background-color 100ms linear;
+}
+
+
+/*							*
+ *			Schedule		*
+ *							*/
+
+#desktop-add-event
+{
+	display: none;
+}
+
+#schedule-list
+{
+	position: relative;
+	top: 70px;
+}
+
+#schedule-types
+{
+	position: fixed;
+	top: 180px;
+	left: 0px;
+	right: 0px;
+	background-color: #2A2A2A;
+	font-size: 0px;
+	height: 70px;
+	margin-bottom: 15px;
+	border: 1px solid #FFFFFF;
+	border-width: 1px 0 0 0;
+}
+
+#schedule-types > input
+{
+	-webkit-appearance: none;
+	background-color: transparent;
+	border: none;
+	font-size: 36px;
+	color: #C2C2C2;
+	width: 33.33%;
+	margin-top: 10px;
+}
+
+#schedule-types > input:hover
+{
+	cursor: pointer;
+}
+
+#schedule-types > .nav-active
+{
+	font-family: "SourceSansPro-Semibold";
+	color: #FFFFFF;
+}

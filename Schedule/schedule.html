@@ -1,0 +1,27 @@
+<section id="schedule-view">
+	<section id="schedule-types">
+		<input id="type-practice" type="button" value="Practice" ng-click="loadPractice()">
+		<input id="type-race" type="button" value="Race" ng-click="loadRaces()">
+		<input id="type-other" type="button" value="Other" ng-click="loadOther()">
+	</section>
+	<section id="schedule-list">
+		<ul>
+			<li ng-repeat="e in events">
+				<h3 class="event-details">{{ e.details }}</h3>
+				<p class="event-date">{{ e.date }}</p>
+				<p class="event-rsvpcount">{{ rsvpCount(e) }}</p>
+			</li>
+		</ul>
+	</section>
+	<form id="desktop-add-event">
+		<ul>
+			<li><input type="text" placeholder="Meeting Location" ng-model="meetingLocation"></li>
+			<li><input type="datetime-local" ng-model="date"></li>
+			<li><input type="checkbox" value="Carpooling" ng-model="carpooling">Carpooling</li>
+			<li><input type="checkbox" value="Cycling" ng-model="cycling">Cycling</li>
+			<li><input type="checkbox" value="RSVP" ng-model="reqRsvp">Require RSVP</li>
+			<li><textarea placeholder="the first line here will appear on the event list" ng-model="details"></textarea></li>
+			<li><input type="button" value="Create {{type}}" ng-click="createEvent(meetingLocation, date, carpooling, cycling, reqRsvp, details)"></li>
+		</ul>
+	</form>
+</section>

@@ -8,15 +8,8 @@ var rootRef		= new Firebase("https://usctriathlon.firebaseio.com/"),
 	newsRef		= rootRef.child('news'),
 	profileRef	= rootRef.child('profile');
 
-function resError(res, error) {
-	res.status = 500;
-	res.json(error);
-}
-
-function resSuccess(res, data) {
-	res.status = 200;
-	res.json(data);
-}
+var errorStatus = 'error';
+var successStatus = 'success';
 
 /*
 
@@ -55,10 +48,15 @@ exports.addNews = function(req, res) {
 	newDataRef.set(newsItem, function(error) {
 		if (error) {
 			console.log("Add News : Error");
-			resError(res, { error: error });
+			res.json({
+				status: errorStatus,
+				error: error
+			});
 		} else {
 			console.log("Add News : Success");
-			resSuccess(res, {});
+			res.json({
+				status: successStatus
+			});
 		}
 	});
 }
@@ -78,9 +76,14 @@ exports.addChat = function(req, res) {
 	console.log("Pushing data to " + newDataRef);
 	newDataRef.set(chatItem, function(error) {
 		if (error) {
-			resError(res, { error: error });
+			res.json({
+				status: errorStatus,
+				error: error
+			});
 		} else {
-			resSuccess(res, {});
+			res.json({
+				status: successStatus
+			});
 		}
 	});
 }
@@ -89,23 +92,34 @@ exports.loadNews = function(req, res) {
 	newsRef.once('value', function(snapshot) {
 		if (snapshot.val() != null) {
 			console.log("Successfully loaded news");
-			resSuccess(res, { news: snapshot.val() });
+			res.json({
+				status: successStatus,
+				news: snapshot.val()
+			});
 		} else {
 			console.log("Error loading news");
-			resError(res, { error: "no news was loaded" });
+			res.json({
+				status: errorStatus,
+				error: "No news was loaded"
+			});
 		}
 	});
 }
 
-exports.loadChat = function(req, res, ws) {
-
+exports.loadChat = function(req, res) {
 	chatRef.once('value', function(snapshot) {
 		if (snapshot.val() != null) {
 			console.log("Successfully loaded chat");
-			resSuccess(res, { chat: snapshot.val() });
+			res.json({
+				status: successStatus,
+				chat: snapshot.val()
+			});
 		} else {
 			console.log("Error loading chat");
-			resError(res, { error: "no chat was loaded" });
+			res.json({
+				status: errorStatus,
+				error: "No chat was loaded"
+			});
 		}
 	});
 }
@@ -135,11 +149,14 @@ exports.createEvent = function(req, res) {
 	var eventDataRef = eventRef.child(type).push();
 	console.log("Pushing data to " + eventDataRef);
 	eventDataRef.set(e, function(error) {
+		var response = {};
 		if (error) {
-			resError(res, { error: error });
+			response.status = errorStatus;
+			response.error = error;
 		} else {
-			resSuccess(res, {});
+			response.status = successStatus;
 		}
+		res.json(response);
 	});
 }
 
@@ -150,11 +167,14 @@ exports.removeEvent = function(req, res) {
 	rsvpRef.child(id).remove();
 
 	eventRef.child(type).child(id).remove(function(error) {
+		var response = {};
 		if (error) {
-			resError(res, { error: error });
+			response.status = errorStatus;
+			response.error = error;
 		} else {
-			resSuccess(res, {});
+			response.status = successStatus;
 		}
+		res.json(response);
 	});
 }
 
@@ -164,10 +184,16 @@ exports.loadEvents = function(req, res) {
 	eventRef.child(type).once('value', function(snapshot) {
 		if (snapshot.val() != null) {
 			console.log("Successfully loaded events");
-			resSuccess(res, { events: snapshot.val() });
+			res.json({
+				status: successStatus,
+				events: snapshot.val()
+			});
 		} else {
 			console.log("Failed loading events");
-			resError(res, { error: "no events were loaded" });
+			res.json({
+				status: errorStatus,
+				error: "No events were loaded"
+			});
 		}
 	});
 }
@@ -188,9 +214,14 @@ exports.rsvp = function(req, res) {
 
 		rsvpRef.child(eventId).child(req.body.method).child(uid).set(rsvp, function(error) {
 			if (error) {
-				resError(res, { error: error });
+				res.json({
+					status: errorStatus,
+					error: error
+				});
 			} else {
-				resSuccess(res, {});
+				res.json({
+					status: successStatus
+				});
 			}
 		});
 	});
@@ -205,10 +236,16 @@ exports.loadRSVPs = function(req, res) {
 	rsvpRef.child(id).once('value', function(snapshot) {
 		if (snapshot.val() != null) {
 			console.log("Successfully loaded rsvps");
-			resSuccess(res, { rsvps: snapshot.val() });
+			res.json({
+				status: successStatus,
+				rsvps: snapshot.val()
+			});
 		} else {
 			console.log("Failed loading rsvps");
-			resError(res, { error: "no rsvps were loaded" });
+			res.json({
+				status: errorStatus,
+				error: "No rsvps were loaded"
+			});
 		}
 	});
 }
@@ -230,7 +267,10 @@ exports.createUser = function(req, res) {
 		password: userPassword
 	}, function(error, userData) {
 		if (error) {
-			resError(res, { error: error });
+			res.json({
+				status: errorStatus,
+				error: error
+			});
 		} else {
 
 			memberRef.child(userData.uid).set({
@@ -240,9 +280,15 @@ exports.createUser = function(req, res) {
 	            officer : isOfficer
 	        }, function(error) {
 	        	if (error) {
-	        		resError(res, { error: error });
+	        		res.json({
+	        			status: errorStatus,
+	        			error: error
+	        		});
 	        	} else {
-	        		resSuccess(res, { uid: userData.uid });
+	        		res.json({
+						status: successStatus,
+						uid: userData.uid
+					});
 	        	}
 	        });
 		}
@@ -259,11 +305,15 @@ exports.loginUser = function(req, res) {
 	}, function(error, authData) {
 		var result = {};
 		if (error) {
-			console.log("login error");
-			resError(res, { error: error });
+			console.log("error");
+			result.status =  errorStatus;
+			result.error =  error;
+			res.json(result);
 		} else {
-			console.log("login success");
-			resSuccess(res, { authData: authData });
+			console.log("success");
+			result.status =  successStatus;
+			result.authData = authData;
+			res.json(result);
 		}
 	});
 }
@@ -286,9 +336,10 @@ exports.updateCarProfile = function(req, res) {
 
 	profileRef.child(uid).child('car').set(carProfile, function(error) {
 		if (error) {
-			resError(res, { error: error });
+			var response = { status: errorStatus, error: error };
+			res.json(response);
 		} else {
-			resSuccess(res, {});
+			res.json( {status: successStatus} );
 		}
 	});
 }
@@ -311,9 +362,10 @@ exports.updateMemberInfo = function(req, res) {
 
 	profileRef.child(uid).child('info').set(info, function(error) {
 		if (error) {
-			resError(res, { error: error });
+			var response = { status: errorStatus, error: error };
+			res.json(response);
 		} else {
-			resSuccess(res, {});
+			res.json( { status: successStatus } );
 		}
 	});
 }
@@ -325,10 +377,16 @@ exports.getCarProfile = function(req, res) {
 	profileRef.child(uid).child('car').once('value', function(snapshot) {
 		if (snapshot.val() != null) {
 			console.log("Successfully loaded car profile");
-			resSuccess(res, { carInfo: snapshot.val() });
+			res.json({
+				status: successStatus,
+				carInfo: snapshot.val()
+			});
 		} else {
 			console.log("Failed loading car profile");
-			resError(res, { error: "could not load car info" });
+			res.json({
+				status: errorStatus,
+				error: "Could not load car information"
+			});
 		}
 	});
 }
@@ -344,15 +402,17 @@ exports.promoteToOfficer = function(req, res) {
 			// set member officer status to true
 			memberRef.child(id).update({officer: true}, function(error) {
 				if (error) {
-					resError(res, { error: "unable to promote to officer at this time" });
+					var response = { status: errorStatus, error: 'unable to promote to officer at this time' };
+					res.json(response);
 				} else {
-					resSuccess(res, {});
+					res.json({ status: successStatus });
 				}
 			});
 
 		} else {
 			// alert for wrong code
-			resError(res, { error: "officer code is incorrect" });
+			var response = { status: errorStatus, error: 'officer code is incorrect' };
+			res.json(response);
 		}
 	});
 }

@@ -1,25 +1,13 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "server code for the usc triathlon app",
-  "main": "main.js",
+  "name": "usctriathlon",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
     "start": "node main.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/danielCantwell/USC-Triathlon-Server.git"
-  },
-  "author": "Daniel Cantwell",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/danielCantwell/USC-Triathlon-Server/issues"
-  },
-  "homepage": "https://github.com/danielCantwell/USC-Triathlon-Server#readme",
   "dependencies": {
+    "express": "^4.1.1",
     "body-parser": "^1.14.2",
-    "express": "^4.13.4",
-    "firebase": "^2.4.0",
-    "ws": "0.4.x"
+    "firebase": "^2.4.0"
   }
 }

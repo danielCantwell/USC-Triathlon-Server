@@ -1,0 +1,18 @@
+<section id="news-view">
+	<section id="news-list">
+		<ul>
+			<li ng-repeat="n in news | orderBy: '-createdAt'">
+				<h3 class="news-title">{{ n.subject }}</h3>
+				<p class="news-date">{{ newsDate(n.createdAt) }}</p>
+				<p class="news-author">{{ n.author }}</p>
+			</li>
+		</ul>
+	</section>
+	<section id="desktop-add-news">
+		<h2>Title</h2>
+		<input id="add-news-title" type="text" placeholder="Enter the title for your news entry" ng-model="subject">
+		<h2>Details</h2>
+		<textarea name="add-news-details" id="add-news-details" placeholder="Enter the details for your news entry" ng-model="message"></textarea>
+		<button ng-click="createNews(subject, message)">Create News Entry</button>
+	</section>
+</section>

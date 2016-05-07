@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>USC Triathlon</title>
+		<!-- <link rel="shortcut icon" href="assets/favicon.png" /> -->
+
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/mobile.css" />
+		<link rel="stylesheet" type="text/css" href="css/desktop.css" media="screen and (min-device-width: 768px)"/>
+
+		<!-- <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+		<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700' rel='stylesheet' type='text/css'> -->
+	</head>
+
+	<body>
+		
+		<!-- This is first, so that it scrolls behind the header and nav -->
+		<section ng-view></section>
+
+		<!-- Fixed location header, at top of screen -->
+		<header>
+			<h1 id="header" class="center-horizontal">USC Triathlon</h1>
+			<input id="settings" type="image" src="assets/settings.png" alt="settings">
+			<input id="new" type="image" src="assets/new.png" alt="new">
+
+			<input id="cancel" type="image" src="assets/cancel.png" alt="settings" hidden="true">
+			<input id="save" type="image" src="assets/accept.png" alt="save" hidden="true">
+		</header>
+
+		<hr>
+
+		<!-- Fixed location nav, right below the header -->
+		<nav>
+			<ul>
+				<li><a id="nav-news" href="#news">News</a></li>
+				<li><a id="nav-chat" href="#chat">Chat</a></li>
+				<li><a id="nav-schedule" href="#schedule">Schedule</a></li>
+				<li><a id="nav-settings" href="#settings">Settings</a></li>
+			</ul>
+			<p id="nav-hint" hidden="true">click above to cancel or save</p>
+		</nav>
+
+	</body>
+
+	<script src="libs/jquery-2.2.3.min.js"></script>
+	<script src="libs/angular.min.js"></script>
+	<script src="libs/angular-route.min.js"></script>
+	<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
+	<script src="test-data.js"></script>
+	<script src="app.js"></script>
+	<script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/master/src/scrollglue.js"></script>
+	<script src="Shared/NetworkService.js"></script>
+	<script src="News/NewsService.js"></script>
+	<script src="News/NewsController.js"></script>
+	<script src="News/AddNewsController.js"></script>
+	<script src="Chat/ChatDirectives.js"></script>
+	<script src="Chat/ChatService.js"></script>
+	<script src="Chat/ChatController.js"></script>
+	<script src="Schedule/ScheduleService.js"></script>
+	<script src="Schedule/ScheduleController.js"></script>
+	<script src="Schedule/AddEventController.js"></script>
+</html>
