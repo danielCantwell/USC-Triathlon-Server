@@ -86,6 +86,51 @@ nav #nav-settings
 	background-color: #2A2A2A;
 }
 
+/*							*
+ *			Login			*
+ *							*/
+
+ #login-view
+ {
+ 	top: 50px;
+ }
+
+ #login-view > h2
+ {
+ 	font-size: 70px;
+ 	margin-top: 80px;
+ }
+
+ #login-view > p
+ {
+ 	font-size: 30px;
+ }
+
+ #login-view > form
+ {
+ 	padding-top: 40px;
+ }
+
+ #login-view > form input
+ {
+ 	height: 80px;
+ 	width: 400px;
+ 	font-size: 28px;
+ }
+
+ #login-view > form input[type="submit"]
+ {
+ 	display: block;
+ 	margin: 0 auto;
+ 	margin-top: 5px;
+ 	/*width: 800px;*/
+ }
+
+ #login-view > form >input[type="button"]
+ {
+ 	height: 60px;
+ }
+
 
 /*							*
  *			News			*

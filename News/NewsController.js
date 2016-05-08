@@ -2,8 +2,8 @@
 	Controller for News Module
 */
 
-newsModule.controller('NewsCtrl', ["News", "$scope",
-	function(News, $scope){
+newsModule.controller('NewsCtrl', ["News", "$scope", "currentAuth",
+	function(News, $scope, currentAuth){
 
 	console.log("News Controller Loaded");
 	$('#new').show();
