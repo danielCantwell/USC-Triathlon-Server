@@ -1,7 +1,14 @@
 <section id="chat-view">
 	<section id="chat-list" message-list messages="messages" scroll-glue></section>
-	<section id="chat-controls">
+	<!-- <section id="chat-groups">
+		<ul>
+			<li ng-show="isOfficer()">Officers</li>
+			<li>General</li>
+			<li>Tri-Related</li>
+		</ul>
+	</section> -->
+	<form id="chat-controls" ng-submit="sendMessage(message)">
 		<input type="text" placeholder="type your message here" ng-model="message">
-		<input type="button" value="send" ng-click="sendMessage(message)">
-	</section>
+		<input type="submit" value="send">
+	</form>
 </section>

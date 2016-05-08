@@ -160,9 +160,15 @@ nav .nav-active
  *			News			*
  *							*/
 
-#news-list
+ #news-list
 {
-	width: 65%;
+	position: fixed;
+	width: auto;
+	bottom: 0px;
+	top: 0px;
+	left: 250px;
+	right: 300px;
+	overflow-y: scroll;
 }
 
 #news-list li,
@@ -216,65 +222,76 @@ nav .nav-active
  *			Add News		*
  *							*/
 
- #desktop-add-news
- {
- 	display: block;
- 	position: fixed;
- 	top: 0px;
- 	right: 0px;
- 	bottom: 0px;
+#desktop-add-news
+{
+	display: block;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
 
- 	/*background-color: #2A2A2A;*/
- 	width: 27%;
+	width: 300px;
 
- 	border: 1px solid #AA0000;
-	border-width: 0px 1px 0px 1px;
- }
+	border: 1px solid #AA0000;
+	border-width: 0 0 0 1px;
+	padding-top: 10px;
+}
 
- #desktop-add-news h2
- {
- 	position: relative;
- 	top: 20px;
- 	left: 10px;
+#desktop-add-news h2
+{
+	margin-left: 15px;
 
- 	font-family: 'SourceSansPro-Regular';
- 	color: #2A2A2A;
- 	font-size: 20px;
- }
+	color: #2A2A2A;
+	font-size: 16px;
 
- #desktop-add-news input
- {
- 	border-radius: 2px;
- 	margin-top: 30px;
- }
+	margin-bottom: 5px;
+}
 
- #desktop-add-news textarea
- {
- 	height: 300px;
- 	margin-top: 20px;
- 	border-radius: 2px;
- }
+#desktop-add-news input,
+#desktop-add-news textarea,
+#desktop-add-news button
+{
 
- #desktop-add-news button
- {
- 	display: block;
- 	margin: 0 auto;
- 	text-align: center;
+	display: block;
+	margin: 0 auto;
 
- 	position: relative;
- 	top: 30px;
- 	width: 80%;
- 	height: 30px;
+	-webkit-appearance: none;
+	width: 260px;
+	border: 1px solid #2A2A2A;
+	border-radius: 2px;
+	font-size: 16px;
 
- 	font-size: 20px;
- 	color: #AA0000;
- 	background-color: #FFFFFF;
- }
+	padding-left: 10px;
 
- #desktop-add-news button:hover
- {
- 	cursor: pointer;
- }
+	margin-bottom: 10px;
+}
+
+#desktop-add-news input
+{
+	height: 30px;
+}
+
+#desktop-add-news textarea
+{
+	padding-left: 5px;
+	padding-top: 5px;
+	height: 250px;
+	resize: none;
+}
+
+#desktop-add-news button
+{
+	background-color: white;
+	color: #AA0000;
+	border-color: #AA0000;
+}
+
+#desktop-add-news button:hover
+{
+	cursor: pointer;
+	color: #FF0000;
+	border-color: #FF0000;
+}
 
  #add-news-view h2 {
  	font-size: 35px;
@@ -303,10 +320,10 @@ nav .nav-active
 {
 	display: block;
 
-	top: 20px;
+	top: 0px;
 	bottom: 50px;
-	left: 290px;
-	right: 10px;
+	left: 280px;
+	right: 300px;
 
 	border-radius: 2px;
 }
@@ -342,7 +359,7 @@ nav .nav-active
 #chat-controls
 {
 	bottom: 5px;
-	right: 10px;
+	right: 300px;
 	left: 260px;
 	height: 40px;
 
@@ -369,11 +386,11 @@ nav .nav-active
 	padding-bottom: 0;
 }
 
-#chat-controls > input[type="button"]
+#chat-controls > input[type="submit"]
 {
 	height: 40px;
 	bottom: 3px;
-	right: 10px;
+	right: 300px;
 	border: 1px solid #AA0000;
 	border-radius: 2px;
 	color: #AA0000;
@@ -425,7 +442,7 @@ nav .nav-active
 	top: 0px;
 	right: 0px;
 	width: 300px;
-	height: 100%;
+	bottom: 0px;
 	border: 1px solid #AA0000;
 	border-width: 0 0 0 1px;
 	padding-top: 10px;
@@ -465,6 +482,8 @@ nav .nav-active
 	background-color: white;
 	color: #AA0000;
 	border-color: #AA0000;
+
+	margin-left: 4px;
 }
 
 #desktop-add-event > ul li input[type="button"]:hover

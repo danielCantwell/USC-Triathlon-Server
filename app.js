@@ -3,8 +3,9 @@ var loginModule = angular.module('login', ['shared']);
 var newsModule = angular.module('news', ['shared']);
 var chatModule = angular.module('chat', ['shared', 'luegg.directives']);
 var scheduleModule = angular.module('schedule', ['shared']);
+var settingsModule = angular.module('settings', ['shared'])
 
-var app = angular.module("app", ["ngRoute", "firebase", "shared", "login", "news", "chat", "schedule"]);
+var app = angular.module("app", ["ngRoute", "firebase", "shared", "login", "news", "chat", "schedule", "settings"]);
 
 // Heroku Server API URL
 // app.constant("API_URL", "http://usctriathlon.herokuapp.com/api/");

@@ -1,5 +1,5 @@
 /*
-	Controller for News Module
+	Controller for Login Module
 */
 
 loginModule.controller('LoginCtrl', ["Auth", "$scope", "$location",
@@ -13,7 +13,6 @@ loginModule.controller('LoginCtrl', ["Auth", "$scope", "$location",
 		console.log("login");
 		Auth.login(userParam).then(function(user) {
 			$('body > nav').show();
-			console.log(user);
 			$location.path("/news");
 		}).catch(function(error) {
 			$('#login-error-message').html(error.message);

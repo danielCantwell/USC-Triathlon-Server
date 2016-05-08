@@ -38,7 +38,7 @@ sharedModule.factory('Auth', ["$firebaseArray", "$firebaseObject", "$firebaseAut
 			}); //authWithPassword
 		}, //login
 
-		logout: function(user) {
+		logout: function() {
 			return auth.$unauth();
 		}, //login
 

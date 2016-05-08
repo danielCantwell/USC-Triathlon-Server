@@ -473,7 +473,7 @@ hr
 	padding-right: 20px;
 }
 
-#chat-controls > input[type="button"]
+#chat-controls > input[type="submit"]
 {
 	width: 15%;
 	bottom: 10px;
@@ -487,12 +487,12 @@ hr
     transition: background-color 800ms linear;
 }
 
-#chat-controls > input[type="button"]:hover
+#chat-controls > input[type="submit"]:hover
 {
 	cursor: pointer;
 }
 
-#chat-controls > input[type="button"]:active
+#chat-controls > input[type="submit"]:active
 {
 	background-color: #AA0000;
 	-webkit-transition: background-color 100ms linear;
