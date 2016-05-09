@@ -2,8 +2,8 @@
 	Service for Chat Module
 */
 
-chatModule.factory('Chat', ['$firebase', '$firebaseArray', '$firebaseObject', 'FIREBASE_URL',
-	function($firebase, $firebaseArray, $firebaseObject, FIREBASE_URL) {
+chatModule.factory('Chat', ['Auth', '$firebase', '$firebaseArray', '$firebaseObject', 'FIREBASE_URL',
+	function(Auth, $firebase, $firebaseArray, $firebaseObject, FIREBASE_URL) {
 
 	var ref = new Firebase(FIREBASE_URL);
 	var chatRef = ref.child('chat');
@@ -12,8 +12,10 @@ chatModule.factory('Chat', ['$firebase', '$firebaseArray', '$firebaseObject', 'F
 	var Chat = {
 		all: messages,
 		send: function(message) {
+			var user = Auth.currentUser();
+			var author = `${user.firstName} ${user.lastName}`;
 			var msg = {
-				author: "daniel cantwell",
+				author: author,
 				message: message
 			}
 			return messages.$add(msg);

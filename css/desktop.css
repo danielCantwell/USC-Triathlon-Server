@@ -114,35 +114,43 @@ nav .nav-active
  *			Login			*
  *							*/
 
- #login-view
+ #login-view,
+ #register-view
  {
  	top: 50px;
  }
 
- #login-view > h2
+ #login-view > h2,
+ #register-view > h2
  {
  	font-size: 70px;
  	margin-top: 80px;
  }
 
- #login-view > p
+ #login-view > p,
+ #register-view > p
  {
  	font-size: 30px;
  }
 
- #login-view > form
+ #login-view > form,
+ #register-view > form
  {
  	padding-top: 40px;
  }
 
- #login-view > form input
+ #login-view > form input,
+ #login-view > form a,
+ #register-view > form input,
+ #register-view > form a
  {
  	height: 80px;
  	width: 400px;
  	font-size: 28px;
  }
 
- #login-view > form input[type="submit"]
+ #login-view > form input[type="submit"],
+ #register-view > form input[type="submit"]
  {
  	display: block;
  	margin: 0 auto;
@@ -150,9 +158,11 @@ nav .nav-active
  	/*width: 800px;*/
  }
 
- #login-view > form >input[type="button"]
+ #login-view > form > a,
+ #register-view > form > a
  {
  	height: 60px;
+ 	line-height: 60px;
  }
 
 

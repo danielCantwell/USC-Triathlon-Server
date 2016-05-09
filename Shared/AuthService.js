@@ -42,22 +42,37 @@ sharedModule.factory('Auth', ["$firebaseArray", "$firebaseObject", "$firebaseAut
 			return auth.$unauth();
 		}, //login
 
-		register: function(user) {
+		register: function(user, officer) {
 			return auth.$createUser({
 				email: user.email,
 				password: user.password
 			}).then(function(regUser) {
 
-				var usersRef = ref.child("member/" + regUser.uid);
+				var officerCodeRef = ref.child("officerCode");
+				
+				officerCodeRef.once("value", function(snap) {
+					var isOfficer = (officer == snap.val());
+					console.log(`officer: ${snap.val()}`);
+					console.log(isOfficer);
 
-				usersRef.set({
-					createdAt : Firebase.ServerValue.TIMESTAMP,
-					firstName: user.firstName,
-					lastName : user.lastName,
-					officer : false
-				});
+					var usersRef = ref.child("member/" + regUser.uid);
 
-			// usersRef.push(userInfo);
+					usersRef.set({
+						createdAt : Firebase.ServerValue.TIMESTAMP,
+						firstName: user.firstName,
+						lastName : user.lastName,
+						officer : isOfficer
+					});
+
+					Auth.login(user).then(function() {
+						$('body > nav').show();
+						$location.path("/news");
+						console.log("logged in");
+					}).catch(function(error) {
+						console.log(error.message);
+						$location.path("/login");
+					});
+				});				
 			}); //promise
 		}, //register
 

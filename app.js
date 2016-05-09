@@ -28,6 +28,10 @@ app.config(function($routeProvider) {
 			templateUrl: 'Login/login.html',
 			controller: 'LoginCtrl'
 		})
+		.when('/register', {
+			templateUrl: 'Login/register.html',
+			controller: 'RegisterCtrl'
+		})
 		.when('/news', {
 			templateUrl: 'News/news.html',
 			controller: 'NewsCtrl',

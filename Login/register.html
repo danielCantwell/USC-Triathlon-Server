@@ -1,0 +1,13 @@
+<section id="register-view">
+	<h2>Register</h2>
+	<p id="register-error-message"></p>
+	<form ng-submit="register(user, officer)">
+		<input type="email" placeholder="email" ng-model="user.email">
+		<input type="password" placeholder="password" ng-model="user.password">
+		<input type="text" placeholder="first name" ng-model="user.firstName">
+		<input type="text" placeholder="last name" ng-model="user.lastName">
+		<input type="text" placeholder="(optional) officer code" ng-model="officer">
+		<input type="submit" value="Enter">
+		<a href="#login">or Login</a>
+	</form>
+</section>
